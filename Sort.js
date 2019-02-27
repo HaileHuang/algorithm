@@ -1,3 +1,33 @@
+function swap(a, i, j) {
+  var tmp = a[j];
+  a[j] = a[i];
+  a[i] = tmp;
+}
+
+// bubble sort
+function bubbleSort(a) {
+  var len = a.length;
+  for (var i = 0; i < len - 1; i++) {
+    for(var j = 0; j < len - 1 - i; j++) {
+      if (a[j] > a[j + 1]) { swap(a, j, j + 1) }
+    }
+  }
+}
+
+// Selection sort
+function selectionSort(a) {
+  var len = a.length;
+  var min, tmp;
+  for (var i = 0; i < len - 1; i++) {
+    min = i;
+    for(var j = i + 1; j < len; j++) {
+      if (a[j] < a[min]) { min = j }
+    }
+    swap(a, i, min)
+  }
+}
+
+//normal Qsort
 function Qsort(a, l, r) {
   if (r <= l) {return ;}
   var i = l, j = r, key = a[l];
@@ -18,14 +48,14 @@ function Qsort(a, l, r) {
 
 //Qsort with partition
 function partition(a, l, r) {
-  if (l >= r) return 
+  if (l >= r) return
   var i = l, j = r, key = a[l]
-  while(i<j) {
-    while(i<j&&a[j] >= key) {
+  while(i < j) {
+    while(i < j && a[j] >= key) {
       j--
     }
     a[i] = a[j]
-    while(i<j&&a[i] <= key){
+    while(i < j && a[i] <= key){
       i++
     }
     a[j] = a[i]
@@ -64,7 +94,6 @@ function merge(a, tmp_a, l, r, mid){
     tmp_a[k] = a[j];
     j++; k++;
   }
-  console.log(l,r,mid,tmp_a)
   for(i = l; i <= r; i++) a[i] = tmp_a[i]
 }
 
@@ -73,5 +102,5 @@ function merge_sort(a, tmp_a, l, r) {
   var mid = parseInt((l + r)/2)
   merge_sort(a, tmp_a, l, mid)
   merge_sort(a, tmp_a, mid+1,r)
-  merge(a,tmp_a,l,r,mid)
+  merge(a, tmp_a, l, r, mid)
 }
